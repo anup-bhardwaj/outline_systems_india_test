@@ -1,0 +1,18 @@
+<div class="container">
+	<label> <input (change)="layoutChange($event)" type="radio" name="layout" value="row">Grid</label>
+	<label> <input (change)="layoutChange($event)" checked type="radio" name="layout" value="column">Column</label>
+
+	<div [fxLayout]="layout">
+		<div class="card" *ngFor="let data of commonData;index as index" fxLayoutAlign="space-between center" >
+			<app-child fxFlex="90%" [layout]="layout" fxFlex.md="100%" fxFlex.sm="100%" fxLayoutAlign="space-between center"
+				fxFlex.xs="100%" [details]= "data" [index]="index" #childComponent
+				(currentIndex)="addMoneyChild($event)"></app-child>
+			<div fxFlex="30%">
+				<button type="button" class="button" (click)="addMoney(index)">Send Money to
+					{{data.name}}</button>
+				<button class="button" (click)="subtractMoney(index)">Get Money from
+					{{data.name}}</button>
+			</div>
+		</div>
+	</div>
+</div>
